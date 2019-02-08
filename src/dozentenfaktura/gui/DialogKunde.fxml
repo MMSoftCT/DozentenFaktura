@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane fx:id="dlgPane" prefHeight="371.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dozentenfaktura.gui.DialogKundeController">
+   <header>
+      <VBox prefHeight="40.0" prefWidth="400.0">
+         <children>
+            <Label fx:id="lblTitle" alignment="CENTER" prefWidth="400.0" text="Kunde bearbeiten">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefWidth="400.0" text="Alle Felder müssen ausgefüllt werden" textFill="RED" />
+         </children>
+      </VBox>
+   </header>
+   <content>
+      <VBox prefHeight="465.0" prefWidth="400.0">
+         <children>
+            <HBox prefHeight="30.0" prefWidth="400.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="100.0" text="Kundenname :" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField id="NAME" fx:id="txtName" prefWidth="260.0" promptText="Bildungseinrichtung">
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="20.0" prefHeight="30.0" prefWidth="400.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="100.0" text="Straße :" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField id="STRASSE" fx:id="txtStrasse" prefWidth="260.0" promptText="Straße">
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="50.0" prefHeight="30.0" prefWidth="400.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="100.0" text="Plz :" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField id="PLZ" fx:id="txtPlz" prefHeight="25.0" prefWidth="74.0" promptText="Postleitzahl">
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="80.0" prefHeight="30.0" prefWidth="400.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="100.0" text="Ort :" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField id="ORT" fx:id="txtOrt" prefWidth="260.0" promptText="Ort">
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="110.0" prefHeight="30.0" prefWidth="400.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="100.0" text="Telefon :" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField id="TELEFON" fx:id="txtTelefon" prefWidth="260.0" promptText="Telefonnummer">
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="140.0" prefHeight="30.0" prefWidth="400.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="100.0" text="Email-Adresse" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="txtEmail" prefWidth="260.0" promptText="Email Adresse">
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="145.0" prefHeight="30.0" prefWidth="400.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="400.0" text="Ansprechpartner (nur wenn bekannt)" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="170.0" prefHeight="30.0" prefWidth="400.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="100.0" text="Anrede :" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox id="AP_ANREDE" fx:id="cbAnrede" prefWidth="150.0" promptText="Bitte auswählen" />
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="170.0" prefHeight="30.0" prefWidth="400.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="100.0" text="Vorname :" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField id="AP_VORNAME" fx:id="txtAnVorname" prefWidth="260.0" promptText="Vorname" />
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="260.0" prefHeight="30.0" prefWidth="400.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="100.0" text="Nachname :" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField id="AP_VORNAME" fx:id="txtAnNachname" prefWidth="260.0" promptText="Vorname" />
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="140.0" prefHeight="30.0" prefWidth="400.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="100.0" text="Durchwahl :" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField id="TELEFON" fx:id="txtAnTelefon" prefWidth="260.0" promptText="Telefonnummer" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+</DialogPane>

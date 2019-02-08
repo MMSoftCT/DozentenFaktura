@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dozentenfaktura.gui.FakturaController">
+  <tabs>
+    <Tab fx:id="TabKunde" text="Kunden">
+         <content>
+            <SplitPane dividerPositions="0.15" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="265.0" prefWidth="600.0">
+                     <children>
+                        <ButtonBar layoutX="7.0" layoutY="7.0" prefHeight="40.0" prefWidth="170.0">
+                          <buttons>
+                            <Button fx:id="KdBtnNeu" mnemonicParsing="false" text="Neu" />
+                              <Button fx:id="KdBtnEdit" minWidth="57.0" mnemonicParsing="false" prefHeight="23.0" text="Bearbeiten" />
+                          </buttons>
+                        </ButtonBar>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <ScrollPane prefHeight="310.0" prefWidth="600.0">
+                           <content>
+                              <TableView fx:id="tblKunde" prefWidth="597.0">
+                                <columns>
+                                  <TableColumn fx:id="colKdNr" editable="false" prefWidth="75.0" text="KundeNr" />
+                                  <TableColumn fx:id="colKdName" editable="false" prefWidth="205.0" text="Name" />
+                                    <TableColumn fx:id="colKdAddress" editable="false" prefWidth="310.0" text="Addresse" />
+                                </columns>
+                                 <contextMenu>
+                                    <ContextMenu>
+                                       <items>
+                                          <MenuItem fx:id="kdNeu" mnemonicParsing="false" text="Kunde neu" />
+                                          <MenuItem fx:id="kdEdit" mnemonicParsing="false" text="Kunde bearbeiten" />
+                                          <MenuItem fx:id="kdAuftrag" mnemonicParsing="false" text="Auftrag erfassen" />
+                                       </items>
+                                    </ContextMenu>
+                                 </contextMenu>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </content>
+    </Tab>
+    <Tab fx:id="TabAuftrag" text="Aufträge">
+         <content>
+            <SplitPane dividerPositions="0.15" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="265.0" prefWidth="600.0">
+                     <children>
+                        <ButtonBar layoutX="7.0" layoutY="7.0" prefHeight="40.0" prefWidth="170.0">
+                           <buttons>
+                              <Button fx:id="AuBtnNeu" mnemonicParsing="false" text="Neu" />
+                              <Button fx:id="AuBtnEdit" layoutX="7.0" layoutY="7.0" minWidth="57.0" mnemonicParsing="false" prefHeight="23.0" text="Bearbeiten" />
+                           </buttons>
+                        </ButtonBar>
+                     </children></AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <ScrollPane prefHeight="310.0" prefWidth="600.0">
+                           <content>
+                              <TableView fx:id="tblAuftrag" prefWidth="597.0">
+                                 <columns>
+                                    <TableColumn fx:id="colAuNr" editable="false" prefWidth="75.0" resizable="false" text="AuftragNr" />
+                                    <TableColumn fx:id="colAuThema" editable="false" prefWidth="360.0" text="Thema" />
+                                    <TableColumn fx:id="colAuVon" editable="false" resizable="false" text="von" />
+                                    <TableColumn fx:id="colAuBis" editable="false" resizable="false" text="bis" />
+                                 </columns>
+                                 <contextMenu>
+                                    <ContextMenu>
+                                       <items>
+                                          <MenuItem fx:id="auNeu" mnemonicParsing="false" text="Auftrag neu" />
+                                          <MenuItem fx:id="auEdit" mnemonicParsing="false" text="Auftrag bearbeiten" />
+                                          <MenuItem fx:id="auRechnung" mnemonicParsing="false" text="Rechnung erstellen" />
+                                       </items>
+                                    </ContextMenu>
+                                 </contextMenu>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                     </children></AnchorPane>
+               </items>
+            </SplitPane>
+         </content>
+    </Tab>
+      <Tab fx:id="TabRechnung" text="Rechnung">
+         <content>
+            <SplitPane dividerPositions="0.15" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="265.0" prefWidth="600.0">
+                     <children>
+                        <ButtonBar layoutX="7.0" layoutY="7.0" prefHeight="40.0" prefWidth="170.0">
+                           <buttons>
+                              <Button fx:id="ReBtnNeu" mnemonicParsing="false" text="Neu" />
+                              <Button fx:id="ReBtnEdit" minWidth="57.0" mnemonicParsing="false" prefHeight="23.0" text="Bearbeiten" />
+                           </buttons>
+                        </ButtonBar>
+                     </children></AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <ScrollPane prefHeight="310.0" prefWidth="600.0">
+                           <content>
+                              <TableView fx:id="tblRechnung" prefWidth="600.0">
+                                 <columns>
+                                    <TableColumn fx:id="colReNr" editable="false" prefWidth="83.0" text="RechnungNr" />
+                                    <TableColumn fx:id="colReDatum" editable="false" prefWidth="105.0" text="Datum" />
+                                    <TableColumn fx:id="colReAuftrag" editable="false" prefWidth="262.0" text="Auftrag" />
+                                    <TableColumn fx:id="colReVersand" editable="false" prefWidth="147.0" text="Versandt" />
+                                 </columns>
+                                 <contextMenu>
+                                    <ContextMenu>
+                                      <items>
+                                          <MenuItem fx:id="reNeu" mnemonicParsing="false" text="Rechnung neu" />
+                                          <MenuItem fx:id="reEdit" mnemonicParsing="false" text="Rechnung bearbeiten" />
+                                          <MenuItem fx:id="reSend" mnemonicParsing="false" text="Rechnung versenden" />
+                                      </items>
+                                    </ContextMenu>
+                                 </contextMenu>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                     </children></AnchorPane>
+               </items>
+            </SplitPane>
+         </content>
+      </Tab>
+  </tabs>
+   <contextMenu>
+      <ContextMenu>
+         <items>
+            <MenuItem fx:id="doNeu" mnemonicParsing="false" text="Dozent neu" />
+            <MenuItem fx:id="doEdit" mnemonicParsing="false" text="Dozent bearbeiten" />
+            <MenuItem fx:id="quit" mnemonicParsing="false" text="Beenden" />
+         </items>
+      </ContextMenu>
+   </contextMenu>
+</TabPane>

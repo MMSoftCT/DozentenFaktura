@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane fx:id="dlgPane" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dozentenfaktura.gui.DialogAuftragController">
+   <header>
+      <VBox prefHeight="50.0" prefWidth="100.0">
+         <children>
+            <Label fx:id="lblTitle" alignment="CENTER" prefWidth="400.0" text="Auftrag bearbeiten">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefWidth="400.0" text="Alle Felder müssen ausgefüllt werden" textFill="#fc0000" />
+         </children>
+      </VBox>
+   </header>
+   <content>
+      <VBox prefWidth="400.0">
+         <children>
+            <HBox prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="120.0" text="Kunde :">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField id="KUNDE" fx:id="txtKunde" disable="true" editable="false" prefWidth="240.0" />
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="20.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="120.0" text="Dozent :">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField id="DOZENT" fx:id="txtDozent" disable="true" editable="false" prefWidth="240.0" />
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="50.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="120.0" text="Thema :">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField id="THEMA" fx:id="txtThema" prefWidth="240.0" promptText="Unterrichtsthema" />
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="80.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="120.0" text="Beginn :">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <DatePicker id="START" fx:id="dpStart" promptText="Startdatum" />
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="110.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="120.0" text="Ende :">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <DatePicker id="ENDE" fx:id="dpEnde" promptText="Enddatum" />
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="140.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="120.0" text="Unterrichtseinheiten :">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField id="EINHEITEN" fx:id="txtEinheiten" alignment="CENTER_RIGHT" prefWidth="60.0" promptText="Stunden" />
+                  <Label prefHeight="25.0" text="a 45 min.">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <CheckBox fx:id="chbBerechnet" mnemonicParsing="false" prefHeight="25.0" text="Berechnet">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </CheckBox>
+               </children>
+            </HBox>
+            <HBox layoutX="20.0" layoutY="170.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="120.0" text="Honorar :">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField id="HONORAR" fx:id="txtHonorar" alignment="CENTER_RIGHT" prefWidth="60.0" />
+                  <Label prefHeight="25.0" text="€">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+</DialogPane>
