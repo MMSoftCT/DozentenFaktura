@@ -49,6 +49,7 @@ public class Invoice
     private final Kunde kunde;
     private final Auftrag auftrag;
     private final Dozent dozent;
+    private final Einstellung einstellung;
 
     public Invoice(Rechnung rechnung)
     {
@@ -56,6 +57,8 @@ public class Invoice
         this.auftrag = DozentenFaktura.getMainHandle().getAuftraege().getAuftragByNr(rechnung.getAuftragNr());
         this.kunde = DozentenFaktura.getMainHandle().getKunden().getKundeByNr(auftrag.getKdNr());
         this.dozent = DozentenFaktura.getMainHandle().getDozenten().getDozentById(auftrag.getDozent());
+        this.einstellung = DozentenFaktura.getMainHandle().getEinstellungen().getByDozentId(dozent.getId());
+        
         LocalDate datum = rechnung.getDatum();
         //String file = "Rechnungen/Rechnung_" + String.format("%02d", datum.getMonthValue()) + "-" + String.valueOf(datum.getYear()) + ".pdf";
         //createDocument(file);
@@ -192,8 +195,9 @@ public class Invoice
 
             ColumnText ct = new ColumnText(cb);
             ct.setSimpleColumn(rect.getLeft(), rect.getTop() - 280, rect.getRight(), rect.getTop() - 230);
-            Paragraph para = new Paragraph("Abrechnung Unterrichtsstunden freie Mitarbeit auf Grundlage der gültigen Honorarvereinbarung für die Veranstaltungen ", BOLD11);
-            para.add(new Phrase(auftrag.getThema(), BOLDITALIC11));
+            String txt = einstellung.getBetreff();
+            txt = txt.replaceAll("[thema]", auftrag.getThema());
+            Paragraph para = new Paragraph(txt, BOLD11);
             ct.addElement(para);
             ct.go();
 
@@ -216,8 +220,8 @@ public class Invoice
             PdfContentByte cb = writer.getDirectContent();
             LocalDate sDate = rechnung.getVon_Datum();
             LocalDate eDate = rechnung.getBis_Datum();
-            String start = String.format("%02d.%2d.%4d", sDate.getDayOfMonth(), sDate.getMonthValue(), sDate.getYear());
-            String ende = String.format("%02d.%2d.%4d", eDate.getDayOfMonth(), eDate.getMonthValue(), eDate.getYear());
+            String start = String.format("%02d.%02d.%4d", sDate.getDayOfMonth(), sDate.getMonthValue(), sDate.getYear());
+            String ende = String.format("%02d.%02d.%4d", eDate.getDayOfMonth(), eDate.getMonthValue(), eDate.getYear());
 
             ColumnText ct = new ColumnText(cb);
             ct.setSimpleColumn(rect.getLeft(), rect.getTop() - 340, rect.getRight(), rect.getTop() - 280);
@@ -440,25 +444,29 @@ public class Invoice
     /**
      * event helper for header and footer
      */
-    public static class HeaderFooterPageEvent extends PdfPageEventHelper
+    public class HeaderFooterPageEvent extends PdfPageEventHelper
     {
 
         @Override
         public void onStartPage(PdfWriter writer, Document document)
         {
-            Rectangle rect = writer.getBoxSize("art");
-            try
+            String img = einstellung.getLogo();
+            
+            if (!img.isEmpty())
             {
-                String img = "tjlogo.png";
-                Image image;
-
-                image = Image.getInstance(getClass().getResource(img));
-                image.scalePercent(50); // scale to 50%
-                image.setAbsolutePosition(rect.getLeft(), rect.getTop() - 80);
-                writer.getDirectContent().addImage(image, true);
-            } catch (IOException | DocumentException ex)
-            {
-                Logger.getLogger(Invoice.class.getName()).log(Level.SEVERE, null, ex);
+                Rectangle rect = writer.getBoxSize("art");
+                try
+                {
+                    Image image;
+                    
+                    image = Image.getInstance(img);
+                    image.scalePercent(50); // scale to 50%
+                    image.setAbsolutePosition(rect.getLeft(), rect.getTop() - 80);
+                    writer.getDirectContent().addImage(image, true);
+                } catch (IOException | DocumentException ex)
+                {
+                    Logger.getLogger(Invoice.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
 

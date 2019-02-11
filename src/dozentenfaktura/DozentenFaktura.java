@@ -127,7 +127,7 @@ public class DozentenFaktura extends Application
             @Override
             protected Void call() throws Exception
             {
-                int max = 4;
+                int max = 5;
                 int i = 0;
                 String db = "Datenbank/DozentenFaktura.db";
                 notifyPreloader(new AppNotification("Lade Datenbank", (double) i / max));
@@ -137,6 +137,16 @@ public class DozentenFaktura extends Application
                 if (!doz.load())
                 {
                     doz.create();
+                }
+                i++;
+                Thread.sleep(500);
+                notifyPreloader(new Preloader.ProgressNotification((double) i / max));
+
+                EinstellungList einst = mainHandle.getEinstellungen();
+                einst.setDB(db);
+                if (!einst.load())
+                {
+                    einst.create();
                 }
                 i++;
                 Thread.sleep(500);

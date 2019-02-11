@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -144,6 +145,8 @@
          <items>
             <MenuItem fx:id="doNeu" mnemonicParsing="false" text="Dozent neu" />
             <MenuItem fx:id="doEdit" mnemonicParsing="false" text="Dozent bearbeiten" />
+            <MenuItem fx:id="doSettings" mnemonicParsing="false" text="Einstellungen" />
+            <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem fx:id="quit" mnemonicParsing="false" text="Beenden" />
          </items>
       </ContextMenu>
