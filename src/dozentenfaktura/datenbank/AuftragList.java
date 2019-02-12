@@ -210,7 +210,7 @@ public class AuftragList extends ArrayList<Auftrag> implements Isql
     @Override
     public boolean update(int i)
     {
-        String query = "UPDATE auftrag SET"
+        String query = "UPDATE auftrag SET "
 		+ "kdNr = ?,"
                 + "dozentId = ?,"
                 + "Thema = ?,"

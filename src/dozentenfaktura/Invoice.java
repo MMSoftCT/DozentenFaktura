@@ -58,7 +58,7 @@ public class Invoice
         this.kunde = DozentenFaktura.getMainHandle().getKunden().getKundeByNr(auftrag.getKdNr());
         this.dozent = DozentenFaktura.getMainHandle().getDozenten().getDozentById(auftrag.getDozent());
         this.einstellung = DozentenFaktura.getMainHandle().getEinstellungen().getByDozentId(dozent.getId());
-        
+
         LocalDate datum = rechnung.getDatum();
         //String file = "Rechnungen/Rechnung_" + String.format("%02d", datum.getMonthValue()) + "-" + String.valueOf(datum.getYear()) + ".pdf";
         //createDocument(file);
@@ -196,7 +196,8 @@ public class Invoice
             ColumnText ct = new ColumnText(cb);
             ct.setSimpleColumn(rect.getLeft(), rect.getTop() - 280, rect.getRight(), rect.getTop() - 230);
             String txt = einstellung.getBetreff();
-            txt = txt.replaceAll("[thema]", auftrag.getThema());
+            String thema = auftrag.getThema();
+            txt = txt.replace("[thema]", thema );
             Paragraph para = new Paragraph(txt, BOLD11);
             ct.addElement(para);
             ct.go();
@@ -225,12 +226,13 @@ public class Invoice
 
             ColumnText ct = new ColumnText(cb);
             ct.setSimpleColumn(rect.getLeft(), rect.getTop() - 340, rect.getRight(), rect.getTop() - 280);
-            Paragraph para = new Paragraph("Sehr geehrte Damen und Herren,", NORMAL);
+            Paragraph para = new Paragraph(einstellung.getAnrede(), NORMAL);
             para.add(Chunk.NEWLINE);
             para.add(Chunk.NEWLINE);
-            para.add("hiermit übersende ich Ihnen die Rechnung zur Dozententätigkeit für den Zeitraum "
-                    + start + " bis "
-                    + ende + " für die o.g. Veranstaltung.");
+            String txt = einstellung.getEinleitung();
+            txt = txt.replace("[start]", start);
+            txt = txt.replace("[ende]", ende);
+            para.add(txt);
             ct.addElement(para);
             ct.go();
         } catch (DocumentException ex)
@@ -248,11 +250,11 @@ public class Invoice
     {
         LocalDate sDate = rechnung.getVon_Datum();
         LocalDate eDate = rechnung.getBis_Datum();
-        
+
         String ue = String.valueOf(countWorkDays(sDate, eDate) * 9);
         String uh = auftrag.getHonorar();
         String sum = rechnung.getSumme();
-        
+
         Rectangle rect = writer.getBoxSize("art");
 
         float[] spalten =
@@ -400,15 +402,18 @@ public class Invoice
         try
         {
             Rectangle rect = writer.getBoxSize("art");
+            String sign = einstellung.getUnterschrift();
+            String name = dozent.getVorname() + " " + dozent.getNachname();
+
             PdfContentByte cb = writer.getDirectContent();
 
             ColumnText ct = new ColumnText(cb);
             ct.setSimpleColumn(rect.getLeft(), rect.getBottom(), rect.getRight(), rect.getTop() - 470);
-            Paragraph txt1 = new Paragraph("Umsatzsteuerfrei nach § 4 Nr. 21 Buchstabe a) bb) i.V.m. § 34 AFG bzw. SGB III", BOLD);
+            Paragraph txt1 = new Paragraph(einstellung.getSchluss1(), BOLD);
             txt1.add(Chunk.NEWLINE);
             txt1.add(Chunk.NEWLINE);
             ct.addElement(txt1);
-            Paragraph txt2 = new Paragraph("Der Rechnungsbetrag ist entsprechend der geltenden Vertragsvereinbarung ohne Abzug zu zahlen bis zum 21.ten Tag nach Seminarende auf das unten angegebene Konto.", NORMAL);
+            Paragraph txt2 = new Paragraph(einstellung.getSchluss2(), NORMAL);
             txt2.add(Chunk.NEWLINE);
             txt2.add(Chunk.NEWLINE);
             ct.addElement(txt2);
@@ -416,16 +421,27 @@ public class Invoice
             txt3.add(Chunk.NEWLINE);
             ct.addElement(txt3);
             ct.addElement(tbl);
-            Paragraph txt4 = new Paragraph(20, "Bei Überweisungen bitte immer die Rechnungsnummer angeben!", NORMAL);
+            Paragraph txt4 = new Paragraph(20, einstellung.getSchluss3(), NORMAL);
             txt4.add(Chunk.NEWLINE);
-            txt4.add("Ich danke Ihnen für Ihren Auftrag.");
+            txt4.add(einstellung.getSchluss4());
             txt4.add(Chunk.NEWLINE);
             txt4.add(Chunk.NEWLINE);
             txt4.add(Chunk.NEWLINE);
-            txt4.add(new Phrase("Unterschrift", BOLDITALIC11));
+            txt4.add(Chunk.NEWLINE);
+            txt4.add(Chunk.NEWLINE);
+            txt4.add(new Phrase(name, BOLDITALIC11));
             ct.addElement(txt4);
             ct.go();
 
+            if (!sign.isEmpty())
+            {
+                Image image;
+                image = Image.getInstance(sign);
+                image.scaleAbsoluteHeight(50);
+                image.setAbsolutePosition(rect.getLeft(), rect.getBottom() + 45);
+                cb.addImage(image, true);
+            }
+            
             cb.saveState();
             cb.setColorStroke(BaseColor.BLACK);
             cb.setLineWidth(1.0);
@@ -435,7 +451,7 @@ public class Invoice
             cb.stroke();
             cb.restoreState();
 
-        } catch (DocumentException ex)
+        } catch (IOException | DocumentException ex)
         {
             Logger.getLogger(Invoice.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -451,16 +467,16 @@ public class Invoice
         public void onStartPage(PdfWriter writer, Document document)
         {
             String img = einstellung.getLogo();
-            
+
             if (!img.isEmpty())
             {
                 Rectangle rect = writer.getBoxSize("art");
                 try
                 {
                     Image image;
-                    
+
                     image = Image.getInstance(img);
-                    image.scalePercent(50); // scale to 50%
+                    image.scaleToFit(150, 80); // scale to 50%
                     image.setAbsolutePosition(rect.getLeft(), rect.getTop() - 80);
                     writer.getDirectContent().addImage(image, true);
                 } catch (IOException | DocumentException ex)

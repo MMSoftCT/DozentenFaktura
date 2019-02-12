@@ -158,7 +158,8 @@ public class EinstellungList extends ArrayList<Einstellung> implements Isql
     @Override
     public boolean update(int i)
     {
-        String query = "UPDATE einstellung SET Dozent = ?,"
+        String query = "UPDATE einstellung SET "
+                + "Dozent = ?,"
                 + "Logo = ?,"
                 + "Betreff = ?,"
                 + "Anrede = ?,"
@@ -167,8 +168,8 @@ public class EinstellungList extends ArrayList<Einstellung> implements Isql
                 + "Schluss2 = ?,"
                 + "Schluss3 = ?,"
                 + "Schluss4 = ?,"
-                + "Unterschrift = ?,"
-                + "WHERE id = ?";
+                + "Unterschrift = ?"
+                + "WHERE id = ?;";
 
 	Einstellung einst = this.get(i);
         Connection conn = this.connect("");

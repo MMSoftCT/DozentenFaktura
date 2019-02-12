@@ -687,6 +687,9 @@ public class FakturaController implements Initializable
         }
     }
 
+    /**
+     * edit invoice setings
+     */
     private void editSettings()
     {
         try
@@ -713,9 +716,9 @@ public class FakturaController implements Initializable
             
             if(result.isPresent())
             {
-                if(result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE)
+                if(result.get().getButtonData() == ButtonBar.ButtonData.APPLY)
                 {
-                    einstellungen.set(index, set);
+                    einstellungen.set(index, ctrl.getData());
                 }
             }
             

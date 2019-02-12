@@ -8,7 +8,12 @@ package dozentenfaktura.gui;
 import dozentenfaktura.*;
 import dozentenfaktura.datenbank.Einstellung;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -69,26 +74,26 @@ public class SettingsController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        taBetreff.setWrapText(true);
+        taEinleitung.setWrapText(true);
+        taSchluss1.setWrapText(true);
+        taSchluss2.setWrapText(true);
+        taSchluss3.setWrapText(true);
     }
 
+    /**
+     * set data to input fields
+     * @param d 
+     */
     public void setData(Einstellung d)
     {
         data = d;
-        if (data.getLogo().isEmpty())
-        {
-
-        }
-        else
+        if (!data.getLogo().isEmpty())
         {
             imgLogo.setImage(getImage(data.getLogo()));
         }
 
-        if (data.getUnterschrift().isEmpty())
-        {
-
-        }
-        else
+        if (!data.getUnterschrift().isEmpty())
         {
             imgSign.setImage(getImage(data.getUnterschrift()));
         }
@@ -116,40 +121,94 @@ public class SettingsController implements Initializable
 
     }
 
+    /**
+     * get data
+     * @return settings
+     */
+    public Einstellung getData()
+    {
+        return data;
+    }
+    
     @FXML
     private void loadLogo(ActionEvent event)
     {
         String logo = selectFile("Ihr Logo auswählen");
+        imgLogo.setImage(getImage(logo));
+        data.setLogo(logo);
     }
 
     @FXML
     private void loadSign(ActionEvent event)
     {
         String sign = selectFile("Ihre Unterschift auswählen");
+        imgSign.setImage(getImage(sign));
+        data.setUnterschrift(sign);
     }
 
+    /**
+     * get a image object fron filepath
+     * @param path
+     * @return 
+     */
     private Image getImage(String path)
     {
         Image img = null;
-        img = new Image(path);
+        File file = new File(path);
+        img = new Image(file.toURI().toString());
         return img;
     }
 
+    /**
+     * file selector for images
+     * @param title
+     * @return selected filename
+     */
     private String selectFile(String title)
     {
         String file = "";
         FileChooser chooser = new FileChooser();
         chooser.setTitle(title);
-        chooser.setInitialDirectory(new File("/"));
+        chooser.setInitialDirectory(new File("."));
         chooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("PNG", "*.png"),
-                new FileChooser.ExtensionFilter("JPG", "*.jpg")
+                new FileChooser.ExtensionFilter("Bilder", "*.png", "*.jpg")
         );
         File ret = chooser.showOpenDialog(DozentenFaktura.getStage());
-        if(ret != null)
+        if (ret != null)
         {
-            file = ret.getPath();
+            try
+            {
+                String wd = new File(".").getCanonicalPath() + "\\Images";
+                if (!ret.getCanonicalPath().contains(wd))
+                {
+                    ret = copyFile(ret);
+                }
+                file = "Images\\" + ret.getName();
+            } catch (IOException ex)
+            {
+                Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return file;
+    }
+
+    private File copyFile(File from) throws FileNotFoundException, IOException
+    {
+        File to = new File("Images\\" + from.getName());
+        if (!to.exists())
+        {
+            System.out.println("Copy file from : " + from.getAbsolutePath() + "\n to : " + to.getCanonicalPath());
+            InputStream in = new FileInputStream(from);
+            OutputStream out = new FileOutputStream(to);
+            byte buf[] = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0)
+            {
+                out.write(buf, 0, len);
+            }
+            in.close();
+            out.close();
+        }
+        return to;
     }
 }

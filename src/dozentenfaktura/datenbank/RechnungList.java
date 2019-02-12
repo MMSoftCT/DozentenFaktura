@@ -154,13 +154,13 @@ public class RechnungList extends ArrayList<Rechnung> implements Isql
                 + "Datum = ?,"
 		+ "teil = ?,"
 		+ "von_Datum = ?,"
-		+ "bis_Datum = ?"
+		+ "bis_Datum = ?,"
                 + "Einheiten = ?,"
                 + "Korrigiert = ?,"
                 + "Summe = ?,"
                 + "Datei = ?,"
-		+ "versand = ?"
-                + "WHERE rechnungNr = ?";
+		+ "versand = ?,"
+                + "WHERE rechnungNr = ?;";
         
         Rechnung re = this.get(i);
         Connection conn = this.connect("");
