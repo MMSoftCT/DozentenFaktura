@@ -7,7 +7,6 @@ package dozentenfaktura;
 
 import dozentenfaktura.datenbank.*;
 import dozentenfaktura.gui.FakturaController;
-import dozentenfaktura.preloader.AppNotification;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;

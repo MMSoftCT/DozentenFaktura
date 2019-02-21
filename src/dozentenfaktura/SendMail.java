@@ -118,12 +118,4 @@ public class SendMail {
 			mex.printStackTrace();
 		}
 	}
-
-	/**
-	* Startmethode der Klasse SendMail
-	* @param args - Argumente aus der Konsole.
-	**/
-	public static void main(String[] args) {
-		//sendMail("empfänger@mail.de", "Betreff", "Text", new File(Dateipfad));
-	}
 }
