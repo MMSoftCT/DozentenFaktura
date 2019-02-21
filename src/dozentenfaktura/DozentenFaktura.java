@@ -132,6 +132,8 @@ public class DozentenFaktura extends Application
                 String db = "Datenbank/DozentenFaktura.db";
                 notifyPreloader(new AppNotification("Lade Datenbank", (double) i / max));
 
+                // load or create table data
+                // dozent data
                 DozentList doz = mainHandle.getDozenten();
                 doz.setDB(db);
                 if (!doz.load())
@@ -142,6 +144,7 @@ public class DozentenFaktura extends Application
                 Thread.sleep(500);
                 notifyPreloader(new Preloader.ProgressNotification((double) i / max));
 
+                // setting data
                 EinstellungList einst = mainHandle.getEinstellungen();
                 einst.setDB(db);
                 if (!einst.load())
@@ -152,6 +155,7 @@ public class DozentenFaktura extends Application
                 Thread.sleep(500);
                 notifyPreloader(new Preloader.ProgressNotification((double) i / max));
 
+                // kunden data
                 KundeList kl = mainHandle.getKunden();
                 kl.setDB(db);
                 if (!kl.load())
@@ -162,6 +166,7 @@ public class DozentenFaktura extends Application
                 Thread.sleep(500);
                 notifyPreloader(new Preloader.ProgressNotification((double) i / max));
 
+                // auftrag data
                 AuftragList al = mainHandle.getAuftraege();
                 al.setDB(db);
                 if (!al.load())
@@ -172,6 +177,7 @@ public class DozentenFaktura extends Application
                 Thread.sleep(500);
                 notifyPreloader(new Preloader.ProgressNotification((double) i / max));
 
+                // rechnung data
                 RechnungList rl = mainHandle.getRecnungen();
                 rl.setDB(db);
                 if (!rl.load())
